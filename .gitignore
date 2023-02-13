@@ -1,0 +1,13 @@
+__pycache__
+dkdata
+*.pyc
+.coverage
+coverage.xml
+htmlcov/
+.idea
+.env
+/robstore.log
+/static
+.venv
+.vscode
+/apimock/node_modules
