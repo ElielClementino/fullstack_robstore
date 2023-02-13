@@ -45,4 +45,5 @@ Full stack application created for selling web applications. Made using the [dja
  - Frontend: 3000
  - Postgres: 15432
  
- PREVIEW WEBSITE: in progress
+PREVIEW WEBSITE: in progress
+[PRESENTATION VIDEO](https://www.loom.com/share/d891410189994a679f8bfbb65bf5e820)
