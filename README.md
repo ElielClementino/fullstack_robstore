@@ -31,7 +31,7 @@ Full stack application created for selling web applications. Made using the [dja
 ## How to run:
  - Build with: ```docker compose build```
  - Run  with: ```docker compose up```
- - ready, now just access ```localhost/```
+ - Ready, now just access ```localhost/```
   
 ## How to acess django admin:
  - With your container running, run in a terminal: ```docker exec -it "BACKEND_CONTAINER_ID" bash```
