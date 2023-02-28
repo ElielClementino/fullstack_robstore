@@ -37,7 +37,7 @@ Full stack application created for selling web applications. Made using the [dja
  - With your container running, run in a terminal: ```docker exec -it "BACKEND_CONTAINER_ID" bash```
  - To find out your backend container ID, run in a terminal: ```docker ps```
  - Inside your container's bash, run: ```./manage.py createsuperuser```
- - Access the address ```localhost/8000``` and log in with the logins created previously
+ - Access the address ```localhost/8000``` and log in with the credentials created previously
   
  ## Used ports:
  - Nginx: 80
