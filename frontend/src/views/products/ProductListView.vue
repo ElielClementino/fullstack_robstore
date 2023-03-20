@@ -20,6 +20,7 @@ import { useAppStore } from "@/stores/appStore"
 import { useAccountsStore } from "@/stores/accountsStore"
 import apis from "@/api/apis.js"
 import Products from "@/components/Products.vue"
+import AccountsApi from "@/api/accounts.api.js"
 
 export default {
   name: "AppsList",
@@ -27,9 +28,10 @@ export default {
     Products,
   },
   setup() {
-
+    const accountsStore = useAccountsStore()
     const appStore = useAppStore()
-    return { appStore }
+
+    return { appStore, accountsStore }
   },
   data() {
     return {
@@ -37,9 +39,11 @@ export default {
       items: [],
       showDialog: false,
       products: [],
+      authenticated: false,
     }
   },
   mounted() {
+    this.setLoggedUser()
     this.listProducts()
     this.showPopup()
   },
@@ -63,6 +67,17 @@ export default {
       apis.listProducts().then((data) => {
         this.products = data.products
         this.loading = false
+      })
+    },
+    setLoggedUser() {
+      AccountsApi.whoami().then((response) =>{
+        this.authenticated = response.authenticated
+        if (!this.authenticated){
+          this.listProducts()
+        }
+        else {
+          this.accountsStore.setLoggedUser(response.user)
+        }
       })
     }
   },
