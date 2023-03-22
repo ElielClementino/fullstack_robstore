@@ -50,4 +50,28 @@ export default {
         })
     })
   },
+  getWalletInfo: (user_id) => {
+    return new Promise((resolve, reject) => {
+      api
+        .post("/api/accounts/wallet-info", {user_id})
+        .then((response) => {
+          return resolve(response.data)
+        })
+        .catch((error) => {
+          return reject(error)
+        })
+    })
+  },
+  depositWalletMoney: (user_id, amount) => {
+    return new Promise((resolve, reject) => {
+      api
+        .post("/api/accounts/wallet-deposit", {user_id, amount})
+        .then((response) => {
+          return resolve(response.data)
+        })
+        .catch((error) => {
+          return reject(error)
+        })
+    })
+  }
 }

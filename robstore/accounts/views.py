@@ -5,7 +5,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
-from .service import accounts_svc
+from .service import accounts_svc, wallet_svc
 from ..products.service import log_svc
 
 
@@ -64,3 +64,20 @@ def _user2dict(user):
         },
     }
     return d
+
+
+def get_wallet_info(request):
+    data = json.loads(request.body.decode())
+    wallet = wallet_svc.get_wallet_info(data)
+    response = {
+        "id": wallet.id,
+        "user_id":wallet.user_id,
+        "amount_stored": wallet.amount_stored
+    }
+    return JsonResponse(response)
+
+
+def deposit_wallet_money(request):
+    data = json.loads(request.body.decode())
+    wallet_deposit = wallet_svc.deposit_wallet_money(data)
+    return JsonResponse(wallet_deposit)

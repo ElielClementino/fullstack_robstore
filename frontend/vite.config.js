@@ -1,3 +1,8 @@
+// Mock
+const path = require('path')
+const apimock = process.env.API_MOCK == '1'
+const apipath = apimock ? 'src/api/apimock.js' : 'src/api/accounts.api.js'
+
 // Plugins
 import vue from "@vitejs/plugin-vue"
 import vuetify, { transformAssetUrls } from "vite-plugin-vuetify"
@@ -21,6 +26,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
+      "~api": path.resolve(__dirname, apipath)
     },
     extensions: [".js", ".json", ".jsx", ".mjs", ".ts", ".tsx", ".vue"],
   },

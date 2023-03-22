@@ -1,0 +1,15 @@
+{
+  "wallet-info": [
+    {
+      "id": 1,
+      "user_id": 3,
+      "amount_stored": 1000
+    }
+  ],
+  "whoami": {
+    "user": {
+      "id": 3
+    },
+    "authenticated": true
+  }
+}
