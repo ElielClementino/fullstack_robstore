@@ -9,3 +9,8 @@ class Profile(models.Model):
 
     def __str__(self):
         return str(self.user)
+
+
+class Wallet(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    amount_stored = models.DecimalField(default=0.00, decimal_places=2, max_digits=12)

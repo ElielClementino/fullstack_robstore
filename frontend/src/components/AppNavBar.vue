@@ -15,6 +15,7 @@
           <v-list>
             <v-list-item :to="{ name: 'base-home' }"> Página inicial </v-list-item>
             <v-list-item :to="{ name: 'products-list' }"> Lista de Produtos </v-list-item>
+            <v-list-item v-if="loggedUser" :to="{ name: 'digital-wallet' }"> Carteira </v-list-item>
             <v-list-item v-if="canAddProduct()" :to="{ name: 'new-product' }"> Adicionar Produto </v-list-item>
             <v-list-item v-if="!loggedUser" :to="{ name: 'accounts-login' }"> Login </v-list-item>
             <v-list-item v-if="!loggedUser" :to="{ name: 'accounts-register' }"> Cadastrar-se </v-list-item>

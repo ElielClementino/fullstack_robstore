@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router"
 import accountsRoutes from "./accounts.routes"
 import baseRoutes from "./base.routes"
 import productsRoutes from "./products.routes"
+import walletRoutes from "./wallet.routes"
 import Page404View from "@/views/base/Page404View.vue"
 
 const router = createRouter({
@@ -10,6 +11,7 @@ const router = createRouter({
     ...baseRoutes,
     ...accountsRoutes,
     ...productsRoutes,
+    ...walletRoutes,
     {
       path: "/:pathMatch(.*)*",
       name: "page-not-found-404",
