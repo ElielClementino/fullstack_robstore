@@ -81,3 +81,9 @@ def deposit_wallet_money(request):
     data = json.loads(request.body.decode())
     wallet_deposit = wallet_svc.deposit_wallet_money(data)
     return JsonResponse(wallet_deposit)
+
+
+def withdraw_wallet_money(request):
+    data = json.loads(request.body.decode())
+    wallet_withdraw = wallet_svc.withdraw_wallet_money(data)
+    return JsonResponse(wallet_withdraw)

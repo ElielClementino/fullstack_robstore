@@ -23,3 +23,19 @@ def deposit_wallet_money(deposit_infos):
             "new_value": wallet[0].amount_stored
         }
     }
+
+def withdraw_wallet_money(deposit_infos):
+    wallet = Wallet.objects.filter(user_id=deposit_infos['user_id'])
+    for wall in wallet:
+        wallet_new_value = wall.amount_stored - deposit_infos['order_amount']
+        wall.amount_stored = wallet_new_value
+    Wallet.objects.bulk_update(wallet, ['amount_stored'])
+
+    return {
+        "deposited": {
+            "wallet_id": wallet[0].id,
+            "user_id": wallet[0].user_id,
+            "amount_withdrew": deposit_infos['order_amount'],
+            "new_value": wallet[0].amount_stored
+        }
+    }

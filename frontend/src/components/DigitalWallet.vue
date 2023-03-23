@@ -23,13 +23,11 @@
       </v-row>
       <v-row dense>
         <v-col
-          v-for="card in cards"
-          :key="card.title"
-          :cols="card.flex"
+          cols="12"
         >
           <v-card>
             <v-img
-              :src="card.src"
+              src="@/assets/download.jpeg"
               class="align-end"
               gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
               height="200px"
@@ -40,7 +38,7 @@
                 class="text-white text-h3 pd-12" 
                 style="line-height:175px;"
               >
-                {{ card.title }}
+                Adicionar dinheiro na carteira
               </v-card-title>
             </v-img>
           </v-card>
@@ -142,11 +140,7 @@ import AccountsApi from "~api"
       amount_to_store: null,
       credit_number: null,
       user_id: null,
-      value: null,
-      cards: [
-        { title: 'Adicionar dinheiro na carteira', src: 'https://img.freepik.com/fotos-premium/muitas-centenas-e-cinquenta-reais-notas-de-dinheiro-brasileiro-salario-de-pagamento-do-grande-premio-em-fundo-branco-isolado_72932-3494.jpg', flex: 12 
-        },
-      ],
+      value: null
     }),
     async mounted(){
         await this.getLoggedUser()

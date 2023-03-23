@@ -73,5 +73,17 @@ export default {
           return reject(error)
         })
     })
+  },
+  withdrawWalletMoney: (user_id, order_amount) => {
+    return new Promise((resolve, reject) => {
+      api
+        .post("/api/accounts/withdraw-wallet-money", {user_id, order_amount})
+        .then((response) => {
+          return resolve(response.data)
+        })
+        .catch((error) => {
+          return reject(error)
+        })
+    })
   }
 }

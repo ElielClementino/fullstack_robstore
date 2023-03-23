@@ -34,17 +34,30 @@
 import apis from "@/api/apis.js"
 import { mapState } from "pinia"
 import { useProductStore } from "@/stores/productsStore"
+import { useAppStore } from "@/stores/appStore"
+import AccountsApi from "@/api/accounts.api.js"
 
   export default {
     setup() {
       const productStore = useProductStore()
-      return { productStore }
+      const appStore = useAppStore()
+      return { productStore, appStore }
     },
     data: () => ({
       filteredProducts: [],
       totalValue: 0,
       items: [],
+      user_id: null,
+      walletInfo: {}
     }),
+    async mounted (){
+      await this.getLoggedUser()
+      await this.filterProducts()
+      await this.getWalletAmount()
+    },
+    computed: {
+      ...mapState(useProductStore, ["products"])
+    },
     methods: {
       async filterProducts () {
         if (!this.products) return
@@ -53,7 +66,7 @@ import { useProductStore } from "@/stores/productsStore"
         for (let idx=0; idx < this.products.length; idx++){
           this.totalValue += this.products[idx][0].price
         }
-        this.filteredProducts.products.map((item, idx) => 
+        this.filteredProducts.products.map((item, idx) =>
           this.items.push(
                 {
                   prependAvatar:item["image_url"],
@@ -65,16 +78,23 @@ import { useProductStore } from "@/stores/productsStore"
         )
       },
       async buyProducts () {
+        if (this.walletInfo?.amount_stored < this.totalValue) {
+          this.appStore.showSnackbar("Saldo insuficiente", "danger")
+          return
+        }
+        await AccountsApi.withdrawWalletMoney(this.user_id, this.totalValue)
         await apis.buyProducts(this.products)
         this.productStore.clearProductQuantity()
         this.$router.push({name: "thanks-for-buying"})
-      }
-    },
-    computed: {
-      ...mapState(useProductStore, ["products"])
-    },
-    mounted () {
-      this.filterProducts()
+      },
+      async getLoggedUser () {
+          await AccountsApi.whoami().then((response) =>{
+              this.user_id = response.user.id
+          })
+      },
+      async getWalletAmount () {
+            this.walletInfo = await AccountsApi.getWalletInfo(this.user_id)
+        }
     }
   }
 </script>
